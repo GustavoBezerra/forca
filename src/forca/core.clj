@@ -30,9 +30,13 @@
   [& args]
   (println "Hello, World!"))
 
-; Exercicios
+; --------- Exercicios ---------
 (defn fibonacci [n] 
   (if (= n 0) 0
     (if (= n 1) 1
     (+ (fibonacci (- n 1)) (fibonacci (- n 2)))))
 )
+
+(defn multiplicaArray [x] (* x 2))
+
+(defn removeOsPares [x] (= 0 (rem x 2)))
