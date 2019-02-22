@@ -3,6 +3,8 @@
 
 (def total-de-vidas 6)
 
+(declare jogo)
+
 (defn perdeu [] (println "Voce perdeu!"))
 (defn ganhou [] (println "Voce ganhou!"))
 
@@ -10,17 +12,27 @@
   (remove (fn [letra] (contains? chutes (str letra))) palavra)
 )
 
+(defn le-letra! [] (read-line))
+
+(defn acertou? [chute palavra] (.contains palavra chute))
 
 (defn acertou-a-palavra-toda? [palavra chutes]
   (empty? (letras-faltantes palavra chutes))
 )
 
-(defn jogo [vidas palavra chutes] 
+(defn avalia-chute [chute vidas palavra acertos]
+  (if (acertou? chute palavra)
+    (jogo vidas palavra (conj acertos chute))
+    (jogo (dec vidas) palavra acertos)
+  )
+)
+
+(defn jogo [vidas palavra acertos] 
   (if (= vidas 0)
     (perdeu)
-    (if (acertou-a-palavra-toda? palavra chutes)
+    (if (acertou-a-palavra-toda? palavra acertos)
       (ganhou)
-      (println "Tente novamente!")      
+      (avalia-chute (le-letra!) vidas palavra acertos)
     )
   )
 )
