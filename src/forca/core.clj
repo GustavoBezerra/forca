@@ -4,13 +4,23 @@
 (def total-de-vidas 6)
 
 (defn perdeu [] (println "Voce perdeu!"))
+(defn ganhou [] (println "Voce ganhou!"))
 
-(defn jogo [vidas] 
+(defn letras-faltantes [palavra chutes]
+  (remove (fn [letra] (contains? chutes (str letra))) palavra)
+)
+
+
+(defn acertou-a-palavra-toda? [palavra chutes]
+  (empty? (letras-faltantes palavra chutes))
+)
+
+(defn jogo [vidas palavra chutes] 
   (if (= vidas 0)
     (perdeu)
-    (do
-      (println (str "Quantidade de vidas restantes: " vidas))
-      (jogo (dec vidas))
+    (if (acertou-a-palavra-toda? palavra chutes)
+      (ganhou)
+      (println "Tente novamente!")      
     )
   )
 )
