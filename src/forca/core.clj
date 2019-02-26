@@ -47,6 +47,7 @@
 (defn comeca-o-jogo [] (jogo total-de-vidas palavra-secreta #{}))
 
 (defn -main [& args]
+  (println "Dica: Nome de um banco!")
   (comeca-o-jogo))
 
 ; --------- Exercicios ---------
